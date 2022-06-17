@@ -9,6 +9,8 @@ class TransferData:
         dbx = dropbox.Dropbox(self.access_token)
 
         for root, dirs, files in os.walk(file_from):
+            for filename in files: 
+                local_path = os.path.join(root, filename)
             
             relative_path = os.path.relpath(local_path, file_from)
             dropbox_path = os.path.join(file_to, relative_path)
@@ -17,7 +19,7 @@ class TransferData:
                 dbx.files_upload(f.read(), dropbox_path , mode=WriteMode('overwrite'))
 
 def main():
-    access_token = 'sl.BJhikcrGqhFhjqk_q91eSQaNl0FToA66VVuEFeI3KGDbIsP6W6-OVRrxAp4qZi5lpNdqG3W8L0kKw53jsdZd4T-6IIyc4tDa4TGvphU7qN8tGttR-pMCT6pLACk1Aiq-CU3C5YE'
+    access_token = 'sl.BJpCgExaG5ko2hHSlsre589clOZNxmiGnaqK4ALyFND9avVawysyITroOeRW7JlAKyK_9FlvQUKtvrRP1G0bVUR_vAZmQSsr9mLLQxi4mqgG9kLFgCDyH37CWAk1ZTO3h3oZCg0'
     transferData = TransferData(access_token) 
 
     file_from = input("Enter the file path to transfer: ")  
